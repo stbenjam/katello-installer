@@ -75,6 +75,10 @@ def remove_event_queue
   end
 end
 
+def fix_cached_counters
+  Kafo::Helpers.execute('foreman-rake fix_cached_counters')
+end
+
 def upgrade_step(step, options = {})
   noop = app_value(:noop) ? ' (noop)' : ''
   long_running = options[:long_running] ? ' (this may take a while) ' : ''
@@ -119,6 +123,7 @@ if app_value(:upgrade)
       upgrade_step :import_distributions, :long_running => true
       upgrade_step :import_puppet_modules, :long_running => true
       upgrade_step :import_subscriptions, :long_running => true
+      upgrade_step :fix_cached_counters
       upgrade_step :elasticsearch_message
       upgrade_step :add_export_distributor, :long_running => true
       upgrade_step :remove_docker_v1_content, :long_running => true
