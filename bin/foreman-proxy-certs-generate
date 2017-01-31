@@ -28,7 +28,8 @@ class ForemanProxyCertsGenerate
                   deploy: false
                   group: foreman
                   org: Default_Organization
-                foreman_proxy_certs: true
+                foreman_proxy_certs:
+                  foreman_proxy_cname: []
               EOF
              )
   end
